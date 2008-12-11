@@ -2,7 +2,7 @@
 
 # Change this to the name of your rails project, like carbonrally.  
 # Just use the same name as the svn repo.
-PROJECT_NAME = "CHANGEME"
+PROJECT_NAME = "my_new_project"
 
 throw "The project's name in environment.rb is blank" if PROJECT_NAME.empty?
 throw "Project name (#{PROJECT_NAME}) must_be_like_this" unless PROJECT_NAME =~ /^[a-z_]*$/
@@ -39,7 +39,7 @@ Rails::Initializer.run do |config|
   config.gem 'thoughtbot-factory_girl', 
              :lib => 'factory_girl', 
              :source => 'http://gems.github.com', 
-             :version => '>= 1.1.3'
+             :version => '>= 1.1.4'
   config.gem 'thoughtbot-shoulda', 
              :lib => 'shoulda', 
              :source => 'http://gems.github.com', 
