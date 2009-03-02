@@ -29,7 +29,7 @@ Rails::Initializer.run do |config|
   config.gem 'mocha', :version => '>= 0.9.5'
   config.gem 'thoughtbot-quietbacktrace', :version => '>= 1.1.5', :lib => 'quietbacktrace'
   config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com', :version => '>= 1.1.5'
-  config.gem 'thoughtbot-shoulda', :lib => 'shoulda', :source => 'http://gems.github.com', :version => '>= 2.0.6'
+  config.gem 'thoughtbot-shoulda', :lib => 'shoulda', :source => 'http://gems.github.com', :version => '>= 2.9.1'
   config.gem 'thoughtbot-clearance', :lib => 'clearance', :version => '0.5.1'
   
   # Only load the plugins named here, in the order given. By default, all plugins 
