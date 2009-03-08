@@ -1,0 +1,5 @@
+h1. March 7, 2009
+
+* Added Paperclip option to model generator
+* Removed comments on model per complaints by thoughtbot
+
