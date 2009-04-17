@@ -8,7 +8,7 @@ throw "The project's name in environment.rb is blank" if PROJECT_NAME.empty?
 throw "Project name (#{PROJECT_NAME}) must_be_like_this" unless PROJECT_NAME =~ /^[a-z_]*$/
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -26,7 +26,7 @@ Rails::Initializer.run do |config|
 
   # Specify gems that this application depends on.
   config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com', :version => '~> 2.3.7'
-  config.gem 'thoughtbot-clearance', :lib => 'clearance', :version => '0.5.3'
+  config.gem 'thoughtbot-clearance', :lib => 'clearance', :version => '0.5.6'
   
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
