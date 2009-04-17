@@ -1,0 +1,86 @@
+require 'capistrano/version'
+require 'yaml'
+load 'deploy' if respond_to?(:namespace) # cap2 differentiator
+Dir['vendor/plugins/*/recipes/*.rb'].each { |plugin| load(plugin) }
+
+# custom settings file - THIS FILE SHOULD BE IGNORED BY SOURCE CODE CONTROL!
+settings_file = 'config/deploy.yml'
+@settings = YAML.load_file(settings_file) if File.exist?(settings_file)
+
+def finalize_setup
+  # roles
+  role :app, deploy_server
+  role :web, deploy_server
+  role :db,  deploy_server, :primary => true
+  
+  # ssh options
+  default_run_options[:pty] = true
+  set :ssh_port, 22
+  set :port, 22
+  
+  # repository options
+  set :repository,  "ssh://#{user}@GIT_IP_ADDRESS:#{port}/home/#{user}/git_repos/#{application}.git"
+  set :deploy_to, "/home/#{user}/public_html/#{application}"
+  set :scm, :git
+  set :deploy_via, :remote_cache
+  
+  # app server options 
+  set :app_server, :mongrel
+  set :app_framework, :rails
+  set :app_server_address, '127.0.0.1'
+  set :app_server_conf, "#{shared_path}/config/mongrel_cluster.yml"
+  set :app_environment, 'production'
+  
+  # http server options
+  set :nginx_sites_available, "/etc/nginx/sites-available"
+  set :nginx_sites_enabled,   "/etc/nginx/sites-enabled"
+  
+  # other miscellaneous options (used throughout project)
+  set :shared_config_path, "/home/#{user}/public_html/#{application}/shared/config"
+  set :public_symlink_dirs, ['photos', 'videos'] # relative to /#{release_path}/public
+end
+
+task :staging do
+  set :application, "www.example.com"
+  set :domain, "staging.example.com"
+  set :user, "USER"
+  set :deploy_server, "123.456.78.91"
+  
+  # extra git options
+  set :branch, 'development'
+  
+  # app server options
+  set :app_servers, 1
+  set :app_server_port, 8004
+  
+  # database options
+  db = @settings['database']['staging']
+  set :db_name, db['name']
+  set :db_user, db['username']
+  set :db_password, db['password']
+  
+  finalize_setup
+end
+
+task :production do
+  set :application, "www.example.com"
+  set :domain, "example.com"
+  set :user, "USER"
+  set :deploy_server, "123.456.78.91"
+  
+  # extra git options
+  set :branch, 'development'
+  
+  # app server options
+  set :app_servers, 2
+  set :app_server_port, 8000
+  
+  # database options 
+  db = @settings['database']['production']
+  set :db_name, db['database']
+  set :db_user, db['username']
+  set :db_password, db['password']
+  
+  finalize_setup
+end
+
