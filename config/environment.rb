@@ -49,7 +49,7 @@ Rails::Initializer.run do |config|
   # If you change this key, all old sessions will become invalid!
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
-  SESSION_KEY = "CHANGESESSION" 
+  SESSION_KEY = "29f5437d11e15cb8f4eb994c9d28202c261ea93f0fc9c4ecfc30830a1da39ab3a7ad834201785ea4fe266f5a598a7fd5965a4ec847e8a04a9fb1513729c3f817" 
   config.action_controller.session = {
     :session_key => "_#{PROJECT_NAME}_session",
     :secret      => SESSION_KEY
