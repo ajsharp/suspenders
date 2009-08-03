@@ -25,7 +25,7 @@ Rails::Initializer.run do |config|
   # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
 
   # Specify gems that this application depends on.
-  config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com', :version => '~> 2.3.7'
+  config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com', :version => '~> 2.3.11'
   config.gem 'thoughtbot-clearance', :lib => 'clearance', :version => '0.5.6'
   
   # Only load the plugins named here, in the order given. By default, all plugins 
