@@ -23,12 +23,10 @@ config.action_mailer.delivery_method = :test
 
 HOST = 'localhost'
 
-require 'factory_girl'
 require 'mocha'
 begin require 'redgreen'; rescue LoadError; end
 
-config.gem 'thoughtbot-shoulda',      :version => '>= 2.10.2',  :lib => 'shoulda'
-config.gem 'thoughtbot-factory_girl', :version => '>= 1.2.2',   :lib => 'factory_girl'
-config.gem 'mocha',                   :version => '>= 0.9.7'
-config.gem 'spork',                   :version => '= 0.7.2'
+config.gem 'shoulda',      :version => '2.10.2'
+config.gem 'factory_girl', :version => '1.2.3'
+config.gem 'spork',        :version => '0.7.3'
 

@@ -7,11 +7,11 @@ Spork.prefork do
   # need to restart spork for it take effect.
   
   ENV["RAILS_ENV"] ||= 'test'
-  require File.dirname(__FILE__) + "/../config/environment"
+  require File.expand_path(File.join(File.dirname(__FILE__),'..','config','environment'))
   require 'spec/autorun'
   require 'spec/rails'
   
-  Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+  Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].each {|f| require f}
   
   Spec::Runner.configure do |config|
     config.use_transactional_fixtures = true
@@ -24,8 +24,7 @@ Spork.prefork do
     # use mocha, flexmock or RR, uncomment the appropriate line:
     #
     # config.mock_with :mocha
-  end
-end
+  end end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
