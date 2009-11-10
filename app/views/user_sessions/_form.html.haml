@@ -1,12 +1,13 @@
 - semantic_form_for @user_session, :url => user_session_path do |f|
   = f.error_messages
   
-    = f.input :login
-    = f.input :password
-    = f.input :remember_me, :as => :check_box
+  = f.input :login
+  = f.input :password
+  = f.check_box :remember_me
+  = f.label "Remember Me"
 
-    -f.buttons
-      = f.commit_button "Log In", :class => "submit"
+  -f.buttons do
+    = f.commit_button "Log In", :class => "submit"
     
   %p
     Forgot your password?

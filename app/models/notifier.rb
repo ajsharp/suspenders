@@ -1,5 +1,3 @@
-#=Notifier
-# The notifier is our mailer class that sends out all of the messages.
 class Notifier < ActionMailer::Base
   default_url_options[:host] = WEB_HOST
   

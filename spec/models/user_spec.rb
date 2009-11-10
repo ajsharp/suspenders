@@ -71,7 +71,7 @@ describe User do
 
     it "should reset the token when sending activation instructions emails" do
       user = Factory.create(:user_waiting_activation)
-      Notifier.expects(:deliver_activation_instructions)
+      Notifier.should_receive(:deliver_activation_instructions)
       old_token = user.perishable_token
       user.deliver_activation_instructions!
       user.perishable_token.should_not == old_token
@@ -79,7 +79,7 @@ describe User do
     
     it "should reset the token when sending activation confirmationemails" do
       user = Factory.create(:user_waiting_activation)
-      Notifier.expects(:deliver_activation_confirmation)
+      Notifier.should_receive(:deliver_activation_confirmation)
       old_token = user.perishable_token
       user.deliver_activation_confirmation!
       user.perishable_token.should_not == old_token
@@ -87,7 +87,7 @@ describe User do
     
     it "should reset the token when sending password reset instructions emails" do
       user = Factory.create(:user_waiting_activation)
-      Notifier.expects(:deliver_password_reset_instructions)
+      Notifier.should_receive(:deliver_password_reset_instructions)
       old_token = user.perishable_token
       user.deliver_password_reset_instructions!
       user.perishable_token.should_not == old_token
