@@ -1,7 +1,7 @@
 <% PASSWORD_FILE = File.join(RAILS_ROOT, '..', '..', 'shared', 'config', 'dbpassword') %>
 
 development:
-  adapter: mysql
+  adapter: sqlite3
   database: <%= PROJECT_NAME %>_development
   username: root
   password: 
