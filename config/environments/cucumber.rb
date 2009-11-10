@@ -23,5 +23,4 @@ config.gem 'cucumber',    :lib => false,        :version => '>=0.4.0' unless Fil
 config.gem 'webrat',      :lib => false,        :version => '>=0.5.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/webrat'))
 config.gem 'rspec',       :lib => false,        :version => '1.2.9'   unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec'))
 config.gem 'rspec-rails', :lib => false,        :version => '1.2.9'   unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
-
-require 'factory_girl'
+config.gem 'factory_girl', :version => '1.2.3'

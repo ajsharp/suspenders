@@ -23,10 +23,9 @@ config.action_mailer.delivery_method = :test
 
 HOST = 'localhost'
 
-require 'mocha'
-begin require 'redgreen'; rescue LoadError; end
-
 config.gem 'shoulda',      :version => '2.10.2'
 config.gem 'factory_girl', :version => '1.2.3'
 config.gem 'spork',        :version => '0.7.3'
+config.gem 'rspec',       :lib => false,        :version => '1.2.9'   unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec'))
+config.gem 'rspec-rails', :lib => false,        :version => '1.2.9'   unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
 
