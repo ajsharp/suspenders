@@ -1,0 +1,10 @@
+% @title = "Set your password"
+
+%h1 Set your password
+
+- semantic_form_for @user, :url => password_reset_path, :method => :put do |f|
+  =f.error_messages
+  = render :partial => "password_resets/form", :locals => {:f => f}
+
+  -f.buttons do
+    = f.commit_button "Update password", :class => "submit"

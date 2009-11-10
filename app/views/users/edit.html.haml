@@ -1,0 +1,17 @@
+#leftcol
+  %h2 Your account details
+
+  - semantic_form_for @user do |f|
+    %p It's really important that you set this to a valid, working, and responsive email address.  This is never shown to anyone on the site, and it's how we will communicate with you about your account as what you are looking for.
+    
+    = f.input :email
+
+    -f.buttons do
+      = f.commit_button "Update your account", :class => "submit"
+
+
+  %h2 Change your password
+  - semantic_form_for @user do |f|
+    = render :partial => "password_resets/form", :locals => {:f => f}
+    -f.buttons do
+      = f.commit_button "Change password", :class => "submit"
