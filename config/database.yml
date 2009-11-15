@@ -2,11 +2,8 @@
 
 development:
   adapter: sqlite3
-  database: <%= PROJECT_NAME %>_development
-  username: root
-  password: 
+  database: db/<%= PROJECT_NAME %>_development
   host: localhost
-  encoding: utf8
   
 test: &TEST
   adapter: sqlite3
@@ -24,3 +21,4 @@ production:
 
 cucumber:
   <<: *TEST
+
