@@ -10,6 +10,9 @@ module NavigationHelpers
     
     when /the home\s?page/
       '/'
+
+    when /the new user page/
+      new_user_url
     
     # Add more mappings here.
     # Here is a more fancy example:
