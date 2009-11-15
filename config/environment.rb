@@ -2,7 +2,7 @@
 
 # Change this to the name of your rails project, like carbonrally.  
 # Just use the same name as the svn repo.
-PROJECT_NAME = "my_new_project"
+PROJECT_NAME = "cvbeast"
 
 throw "The project's name in environment.rb is blank" if PROJECT_NAME.empty?
 throw "Project name (#{PROJECT_NAME}) must_be_like_this" unless PROJECT_NAME =~ /^[a-z_]*$/
