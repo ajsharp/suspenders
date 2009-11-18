@@ -18,6 +18,7 @@ Rails::Initializer.run do |config|
   config.gem 'authlogic',            :version => '2.1.2'
   config.gem 'haml',                 :version => '2.2.13'
   config.gem 'formtastic',           :version => '0.9.1'
+  config.gem 'state_machine',        :version => '0.8.0'
   
   # Run "rake -D time" for a list of tasks for finding time zone names. Uncomment to use default local time.
   config.time_zone = 'UTC'
