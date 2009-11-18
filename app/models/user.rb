@@ -1,12 +1,8 @@
-#=User
-# A user can take on many roles depending on the circumstances.
-#==Admin
-# A user with the admin role is an admin and can approve MentorRequests.
-
 class User < ActiveRecord::Base
   
-  acts_as_authentic do |user_model|
-    user_model.validates_length_of_password_field_options = {:minimum => 6, :on => :update, :if => :has_no_credentials? }
+  acts_as_authentic do |u|
+    u.validates_length_of_password_field_options = {:minimum => 6, :on => :update, :if => :has_no_credentials? }
+    u.validate_login_field false
   end
   # implement if necessary
   #has_one :profile, :dependent => :destroy
@@ -16,7 +12,7 @@ class User < ActiveRecord::Base
   
   #delegate :name, :to => :profile
   
-  attr_accessible :login, :email, :password, :password_confirmation
+  attr_accessible :email, :password, :password_confirmation
   
   # returns true if the user has the "admin" role, false if not.
   def admin?
@@ -43,7 +39,6 @@ class User < ActiveRecord::Base
   # creates the account in the database,
   # sending the activation.
   def signup!(params)
-    self.login = params[:user][:login]
     self.email = params[:user][:email]
     save_without_session_maintenance
   end
@@ -55,7 +50,7 @@ class User < ActiveRecord::Base
     self.active = true
     self.password = params[:user][:password]
     self.password_confirmation = params[:user][:password_confirmation]
-    #save_and_create_profile
+    save_and_create_profile
     self.save
   end
   

@@ -29,7 +29,7 @@ describe User do
       Factory.create(:admin)
       
       @user = User.new
-      params = {:user => {:login => "bphogan", :email => "foo@bar.com"}}
+      params = {:user => {:email => "foo@bar.com"}}
       @user.signup!(params).should == true
    
     end
