@@ -16,12 +16,12 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new
+    @user = User.new(params[:user])
 
-    if @user.signup!(params)
+    if @user.save
       @user.deliver_activation_instructions!
       flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
-      redirect_to root_url
+      redirect_to activations_url
     else
       render :action => :new
     end

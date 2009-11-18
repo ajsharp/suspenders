@@ -23,18 +23,29 @@ describe UsersController do
 
   
   describe "POST /create" do
-  
-    it "should send activation message when successfully created" do
-      Notifier.should_receive(:deliver_activation_instructions)
-      post :create, :user => { :login => "newuser", :email => "new@new.com" }
-      response.should redirect_to(root_url)
-    end
-    
-    it "should redisplay the login page if nothing passed" do
-      post :create, :user=>{:email => "new@new.com"}
-      response.should render_template("new")
+    context "user is successfully created" do
+      before :each do
+        Notifier.should_receive(:deliver_activation_instructions)
+        post :create, :user => { :email => "new@new.com" }
+      end
+
+      it { should respond_with :redirect }
+      it { should redirect_to activations_url }
     end
 
+    context "error creating user" do
+      before :each do
+        @user = Factory.build :user
+        User.should_receive(:new).and_return(@user)
+        @user.should_receive(:save).and_return(false)
+
+        post :create, :user => { :email => "new@new.com" }
+      end
+
+      it { should render_template :new }
+      it { should_not respond_with :redirect }
+    end
+  
   end
   
   describe "when not logged in" do
@@ -65,7 +76,7 @@ describe UsersController do
     describe "when editing an existing account" do
       
       it "should not display the edit page for a different account" do
-        another_user = Factory.create(:active_user, :email => "foo@example.com", :login => "another_user")
+        another_user = Factory.create(:active_user, :email => "foo@example.com")
         get :edit, :id => another_user.id
         response.should redirect_to(dashboard_path)
       end
