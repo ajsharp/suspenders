@@ -4,9 +4,17 @@ class User < ActiveRecord::Base
     u.validates_length_of_password_field_options = {:minimum => 6, :on => :update, :if => :has_no_credentials? }
     u.validate_login_field false
   end
-  # implement if necessary
-  #has_one :profile, :dependent => :destroy
-  
+
+  state_machine :state, :initial => :pending do
+    state :pending
+    state :active
+
+    event :activate do
+      transition :pending => :active
+    end
+  end
+
+  has_one  :profile, :dependent => :destroy
   has_many :user_roles, :dependent => :destroy
   has_many :roles, :through => :user_roles
   
@@ -87,9 +95,9 @@ class User < ActiveRecord::Base
   
    # Creates a blank profile, associates it with the user, 
    # and saves the user
-   # def save_and_create_profile
-   #   self.profile = Profile.new
-   #   self.save
-   # end
+   def save_and_create_profile
+     self.profile = Profile.new
+     self.save
+   end
    
 end

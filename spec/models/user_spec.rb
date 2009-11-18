@@ -41,11 +41,11 @@ describe User do
       @user.should_not have_role("admin")
     end
     
-    # it "should create a blank profile when created" do
-    #   @user.activate!(:user => {:password => "homersimpson", :password_confirmation=>"homersimpson"})
-    #   @user = User.find(@user.id)
-    #   @user.profile.should_not be_nil
-    # end
+    it "should create a blank profile when created" do
+      @user.activate!(:user => {:password => "homersimpson", :password_confirmation=>"homersimpson"})
+      @user = User.find(@user.id)
+      @user.profile.should_not be_nil
+    end
     
   end
 
