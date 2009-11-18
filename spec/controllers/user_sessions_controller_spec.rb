@@ -15,8 +15,8 @@ describe UserSessionsController do
      @user = Factory.create(:active_user,
                             :password => "test",
                             :password_confirmation => "test",
-                            :login => "homer")
-     post :create, :user_session => {:login => "homer", :password => "test"}
+                            :email => "email@address.com")
+     post :create, :user_session => {:email => "email@address.com", :password => "test"}
      response.should redirect_to(dashboard_url)
    end
    
