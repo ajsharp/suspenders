@@ -1,12 +1,10 @@
 Factory.define :user do |u|
-  u.login "user"
   u.email "user@example.com"
   u.password "password"
   u.password_confirmation "password"
 end
 
 Factory.define :admin, :parent => :user do |a|
-  a.login "admin"
   a.email "admin@example.com"
   a.roles {|factory| [factory.association(:admin_role)]}
   a.active true
