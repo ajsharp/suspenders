@@ -1,15 +1,30 @@
+require 'rubygems'
+require 'spork'
 
-ENV["RAILS_ENV"] ||= 'test'
-require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_ROOT)
-require 'spec/autorun'
-require 'spec/rails'
-require 'authlogic/test_case' 
+Spork.prefork do
+  ENV["RAILS_ENV"] ||= 'test'
+  require File.dirname(__FILE__) + "/../config/environment" 
+  require 'spec/autorun'
+  require 'spec/rails'
+  require 'authlogic/test_case' 
 
-
-Spec::Runner.configure do |config|
-
-  config.use_transactional_fixtures = true
-  config.use_instantiated_fixtures  = false
-  config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
-
+  Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f} 
+  
+  Spec::Runner.configure do |config|
+    include Authlogic::TestCase
+    include LoginHelper
+  
+    config.use_transactional_fixtures = true
+    config.use_instantiated_fixtures  = false
+    config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
+  
+  end
+  
 end
+
+Spork.each_run do
+  # This code will be run each time you run your specs.
+  
+end
+
+
