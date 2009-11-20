@@ -43,11 +43,10 @@ class User < ActiveRecord::Base
   end
   
   # User creation/activation
-  # Sets the login and email and then
-  # creates the account in the database,
+  # Sets the email and then creates the account in the database,
   # sending the activation.
-  def signup!(params)
-    self.email = params[:user][:email]
+  def signup!
+    #self.email = params[:user][:email]
     save_without_session_maintenance
   end
   
