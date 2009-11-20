@@ -7,13 +7,14 @@ ActionController::Routing::Routes.draw do |map|
   map.resource  :dashboard, :controller => "dashboard"
   
   
-  map.register '/register/:activation_code', :controller => 'activations', :action => 'new'
-  map.activate '/activate/:id', :controller => 'activations', :action => 'create'
+  map.register '/register/:activation_code',  :controller => 'activations', :action => 'new'
+  map.activate '/activate/:id',               :controller => 'activations', :action => 'create'
+  map.activations '/activations',             :controller => 'activations'
   
   map.signup "/signup", :controller => "users", :action => "new"
   map.login "/login", :controller => "user_sessions", :action => "new"
   map.logout "/logout", :controller => "user_sessions", :action => "destroy"
 
-  map.root :controller =>"dashboard", :action => "index"
+  map.root :controller =>"public_pages", :action => "home"
 
 end
