@@ -24,4 +24,5 @@ describe ActivationsController do
        response.should render_template("new")
      end
    end
+
 end

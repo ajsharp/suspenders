@@ -21,7 +21,6 @@ describe UsersController do
     end
   end
 
-  
   describe "POST /create" do
     context "user is successfully created" do
       before :each do
@@ -30,7 +29,7 @@ describe UsersController do
       end
 
       it { should respond_with :redirect }
-      it { should redirect_to activations_url }
+      it { should redirect_to root_url }
     end
 
     context "error creating user" do
