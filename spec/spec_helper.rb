@@ -12,6 +12,7 @@ Spork.prefork do
   
   Spec::Runner.configure do |config|
     include Authlogic::TestCase
+
     include LoginHelper
   
     config.use_transactional_fixtures = true
