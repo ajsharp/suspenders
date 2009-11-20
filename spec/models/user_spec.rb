@@ -26,13 +26,10 @@ describe User do
 
   describe "should sign up a user" do
     before(:each) do
-      Factory.create(:admin)
-      
-      @user = User.new
-      params = {:user => {:email => "foo@bar.com"}}
-      @user.signup!(params).should == true
-   
+      @user = User.new :email => "foo@bar.com"
+      @user.signup!.should == true
     end
+
     it "should set active to false" do
       @user.should_not be_active
     end
