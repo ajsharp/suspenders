@@ -1,10 +1,9 @@
 %h2 Sign up for a new account
-%p Signing up is easy. Give us a login name and an email address. We'll send you a confirmation email. You'll click the link in the email which will bring you back here where you'll complete your signup. This whole process should only take about a minute, but if you need help, don't hesitate to let us know!
+%p Signing up is easy. All we need is your email address. 
 
 - semantic_form_for @user do |f|
   = f.error_messages
-  = f.input :login
   = f.input :email
 
   -f.buttons do
-    = f.commit_button "Sign Up", :button_html => { :class => "submit" }
+    = f.commit_button "Sign Up!", :button_html => { :class => "submit" }
