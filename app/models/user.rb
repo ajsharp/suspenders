@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
     state :pending
     state :active
 
+    before_transition :pending => :active do |user|
+      user.profile = Profile.new
+    end
+
     event :activate do
       transition :pending => :active
     end
@@ -53,50 +57,50 @@ class User < ActiveRecord::Base
   # Activates a user, sets their password, and 
   # creates a blank profile record associated
   # with the user.
-  def activate!(params)
-    self.active = true
-    self.password = params[:user][:password]
-    self.password_confirmation = params[:user][:password_confirmation]
-    save_and_create_profile
+  #def activate!(params)
+  #  self.active = true
+  #  self.password = params[:user][:password]
+  #  self.password_confirmation = params[:user][:password_confirmation]
+  #  save_and_create_profile
+  #  self.save
+  #end
+  
+  def update_and_activate!(params)
+    self.password              = params[:password]
+    self.password_confirmation = params[:password_confirmation]
+    self.activate
+  end
+
+  # Returns true if the password field in the database is blank
+  def has_no_credentials?
+    self.pending? || self.crypted_password.blank?
+  end
+
+  # Email notifications
+  
+  # Resets the token and sends the password reset instructions via Notifier
+  def deliver_password_reset_instructions!
+    reset_perishable_token!
+    Notifier.deliver_password_reset_instructions(self)
+  end
+
+  # Resets the token and sends the activation instructions via Notifier
+  def deliver_activation_instructions!
+    reset_perishable_token!
+    Notifier.deliver_activation_instructions(self)
+  end
+
+  # Resets the token and sends the activation confirmatio via Notifier
+  def deliver_activation_confirmation!
+    reset_perishable_token!
+    Notifier.deliver_activation_confirmation(self)
+  end
+ 
+  # Creates a blank profile, associates it with the user, 
+  # and saves the user
+  def save_and_create_profile
+    self.profile = Profile.new
     self.save
   end
   
-   # an active account - passed activation  
-   # Returns true if the user's active flag is set, false if not
-   def active?
-     active == true
-   end
-   
-   # Returns true if the password field in the database is blank
-   def has_no_credentials?
-     self.crypted_password.blank?# && self.openid_identifier.blank?
-   end
-
-   # Email notifications
-   
-   # Resets the token and sends the password reset instructions via Notifier
-   def deliver_password_reset_instructions!
-     reset_perishable_token!
-     Notifier.deliver_password_reset_instructions(self)
-   end
-
-   # Resets the token and sends the activation instructions via Notifier
-   def deliver_activation_instructions!
-     reset_perishable_token!
-     Notifier.deliver_activation_instructions(self)
-   end
-
-   # Resets the token and sends the activation confirmatio via Notifier
-   def deliver_activation_confirmation!
-     reset_perishable_token!
-     Notifier.deliver_activation_confirmation(self)
-   end
-  
-   # Creates a blank profile, associates it with the user, 
-   # and saves the user
-   def save_and_create_profile
-     self.profile = Profile.new
-     self.save
-   end
-   
 end
