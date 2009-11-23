@@ -11,7 +11,7 @@ class ActivationsController < ApplicationController
     raise Exception if @user.active?
  
     if @user.update_and_activate!(params[:user])
-      UserSession.create @user 
+      UserSession.create @user
       @user.deliver_activation_confirmation!
       flash[:success] = "Your account has been activated."
       redirect_to dashboard_path
