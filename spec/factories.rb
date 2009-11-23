@@ -7,16 +7,16 @@ end
 Factory.define :admin, :parent => :user do |a|
   a.email "admin@example.com"
   a.roles {|factory| [factory.association(:admin_role)]}
-  a.active true
+  a.state "active"
 end
 
 Factory.define :active_user, :parent => :user do |u|
-  u.active true
+  u.state "active"
 end
 
 
 Factory.define :user_waiting_activation, :parent => :user do |u|
-  u.active false
+  u.state "pending"
   u.perishable_token  "abcd"
 end
 
