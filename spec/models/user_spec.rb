@@ -148,3 +148,63 @@ describe User, "#update_and_activate!" do
   end
 
 end
+
+describe User, "factories" do
+  describe "admin" do
+    before :each do
+      @user = Factory.build :admin
+    end
+
+    it "should validate" do
+      @user.should be_valid
+    end
+
+    it "should save" do
+      @user.save.should == true
+    end
+
+    it "should be an admin" do
+      @user.save
+      @user.should be_admin
+    end
+  end
+end
+
+describe User, "#has_role?" do
+  context "an admin user" do
+    before(:all) { @user = Factory.create :admin }
+    after(:all)  { @user.destroy }
+
+    it "should be an admin" do
+      @user.should have_role "Admin"
+      @user.should be_admin
+    end
+
+    it "should not be an owner" do
+      @user.should_not have_role "Owner"
+    end
+
+    it "should have one role" do
+      @user.should have(1).role
+    end
+  end
+
+  context "a normal user" do
+    before(:all) { @user = Factory.create :active_user }
+    after(:all)  { @user.destroy }
+
+    it "should not be an admin" do
+      @user.should_not have_role "Admin"
+      @user.should_not have_role "admin"
+      @user.should_not be_admin
+    end
+
+    it "should not be an owner" do
+      @user.should_not have_role "Owner"
+    end
+
+    it "should not have any roles" do
+      @user.should_not have(:any).roles
+    end
+  end
+end

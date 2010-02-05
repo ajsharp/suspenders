@@ -34,8 +34,8 @@ class User < ActiveRecord::Base
   # returns true if the specified role is associated with the user.
   #  
   #  user.has_role("admin")
-  def has_role?(role)
-    self.roles.count(:conditions => ["name = ?", role]) > 0
+  def has_role?(role_name)
+    !!roles.find(:first, :conditions => { :name => role_name })
   end
   
   # Adds a role to the user by name
