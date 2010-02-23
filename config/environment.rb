@@ -17,7 +17,7 @@ Rails::Initializer.run do |config|
   # Run "rake -D time" for a list of tasks for finding time zone names. Uncomment to use default local time.
   config.time_zone = 'UTC'
 
-  #config.action_controller.session_store = :active_record_store
+  config.action_controller.session_store = :active_record_store
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
