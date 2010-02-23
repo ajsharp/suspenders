@@ -14,11 +14,6 @@ RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'mislav-will_paginate', :lib => 'will_paginate', :version => '~> 2.3.11'
-  config.gem 'authlogic',            :version => '2.1.2'
-  config.gem 'haml',                 :version => '2.2.13'
-  config.gem 'formtastic',           :version => '0.9.1'
-  config.gem 'state_machine',        :version => '0.8.0'
   
   # Run "rake -D time" for a list of tasks for finding time zone names. Uncomment to use default local time.
   config.time_zone = 'UTC'
