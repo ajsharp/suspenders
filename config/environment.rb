@@ -1,8 +1,8 @@
 # Be sure to restart your server when you modify this file
 
 # Change this to the name of your rails project, like carbonrally.  
-# Just use the same name as the svn repo.
-PROJECT_NAME = "PROJECT_NAME"
+# Just use the same name as the git repo.
+PROJECT_NAME = "project_name"
 
 throw "The project's name in environment.rb is blank" if PROJECT_NAME.empty?
 throw "Project name (#{PROJECT_NAME}) must_be_like_this" unless PROJECT_NAME =~ /^[a-z_]*$/
