@@ -1,3 +1,5 @@
+Bundler.require :default, :test
+
 # Settings specified here will take precedence over those in config/environment.rb
 
 # The test environment is used exclusively to run your application's
@@ -22,10 +24,4 @@ config.action_controller.allow_forgery_protection    = false
 config.action_mailer.delivery_method = :test
 
 HOST = 'localhost'
-
-config.gem 'shoulda',      :version => '2.10.2'
-config.gem 'factory_girl', :version => '1.2.3'
-config.gem 'spork',        :version => '0.7.3'
-config.gem 'rspec',       :lib => false,        :version => '1.2.9'   unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec'))
-config.gem 'rspec-rails', :lib => false,        :version => '1.2.9'   unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
 
